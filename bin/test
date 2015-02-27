@@ -1,0 +1,2 @@
+mocha apps/authentication/_helper.js apps/authentication/test/authentication-test.coffee
+
