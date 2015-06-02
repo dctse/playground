@@ -1,6 +1,10 @@
 require("coffee-script/register");
 
 var express = require('express');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -21,7 +25,18 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
+app.use(session({
+  secret: "asntoedisaotnehuasontehuasontehuasontehuasonetuhaoeu",
+  resave: true,
+  saveUninitialized: true,
+  store: new RedisStore
+}));
+
+
+console.log()
 app.use(express.static(path.join(__dirname, 'public')));
+
+// require("./apps/helpers")(app);
 
 require("./apps/authentication/routes")(app);
 
@@ -37,6 +52,11 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 
+if (app.get('env') === 'test') {
+  app.set('port', 3001);
+}
+
+
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -47,6 +67,8 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
+
 
 // production error handler
 // no stacktraces leaked to user

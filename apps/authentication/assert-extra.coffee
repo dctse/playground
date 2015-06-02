@@ -54,4 +54,4 @@ typeOf = (value) ->
           s = t.name.toLowerCase()
     else
       s = 'null'
-  return s;
+  return s

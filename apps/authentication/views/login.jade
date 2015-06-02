@@ -1,11 +1,13 @@
+extends layout
 
+block content
 
-form(action='/sessions', method='post')
-  label
-    | Username
-    input(type='text', name='user')
-  label
-    | Password
-    input(type='password', name='password')
-
-  input(type='submit', name='Submit')
+    form(name="/sessions", method="post")
+        div.input
+            span.label Username
+            input(type="text", name="user")
+        div.input
+            span.label Password
+            input(type='password', name='password')
+        div.actions
+            input(type="submit", value="Submit")
